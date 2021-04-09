@@ -1,18 +1,57 @@
 /* Global Variables */
+const generateBtn = document.querySelector('#generate')
 
 // Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let d0 = new Date();
+let todaysDate = `${d0.getDate()}/${d0.getMonth()+1}/${d0.getFullYear()}`
 
 // Personal API Key for OpenWeatherMap API
+const key = '574b80f9614a9b51b404b6a8bb946b48'
+const baseURL = `https://api.openweathermap.org/data/2.5/weather?`
 
-// Event listener to add function to existing HTML DOM element
+// Event Handler Function
+const checkInput = async () => {
+    const cityName = document.querySelector('#cityName').value
+    const feelings = document.querySelector('#feelings').value
+    if(!cityName){
+        // to stop here: use return
+        return alert('city name can not be empty')
+    }
+    if(!feelings){
+        return alert('please tell us how you feel')
+    }
+    getWeatherData(cityName, feelings)
+}
+generateBtn.addEventListener('click', checkInput)
 
-/* Function called by event listener */
+// Get Weather Data Function
+const getWeatherData = async _ => {
+    try {
+        const response = await fetch(`${baseURL}q=${cityName}&appid=${key}&units=metric`)
+        if (response.status === 404 || 400) {
+            return alert('please enter a valid city name')
+        }
+        const weatherData = await response.json()
+        const temp = weatherData.main.temp
+    }
+    
+    catch(err) {
+        console.log(err)
+    }
 
-/* Function to GET Web API Data*/
-
-/* Function to POST data */
-
-
-/* Function to GET Project Data */
+    // Sending data to the server
+    await fetch('/saveData', {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            date:todaysDate,
+            temp: temp,
+            feelings: feelings
+        })
+    })
+}
+// for test purposes
+// q=london&appid=574b80f9614a9b51b404b6a8bb946b48&units=metric
