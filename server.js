@@ -9,7 +9,16 @@ const port = process.env.PORT || 3000
 
 
 // Setup empty JS object to act as endpoint for all routes
-projectData = {};
+let projectData = {};
+
+/* Middleware*/
+// bodyParser
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json());
+// Cors for cross origin allowance
+app.use(cors())
+// Initialize the main project folder
+app.use(express.static('website'));
 
 // Setting Route For Home Page GET REQs
 app.get('/', (req, res) => {
@@ -20,22 +29,14 @@ app.get('/', (req, res) => {
 app.post('/saveData', (req, res) => {
     projectData.temp = req.body.temp
     projectData.date = req.body.date
-    projectData.userResponse = req.body.feelings
-    res.send();
+    projectData.feelings = req.body.feelings
+    res.send(projectData);
 })
 
 app.get('/data', (req, res) => {
-    res.send(`data: ${projectData}`)
+    res.send(projectData)
 })
 
-/* Middleware*/
-// bodyParser
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(bodyParser.json());
-// Cors for cross origin allowance
-app.use(cors())
-// Initialize the main project folder
-app.use(express.static('website'));
 
 
 // Setup Server (spin, debug callback)
