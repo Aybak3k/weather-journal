@@ -16,9 +16,8 @@ const baseURL = `https://api.openweathermap.org/data/2.5/weather?`
 // Event Handler Function
 const checkInput = event => {
     event.preventDefault()
-    
+
     const zipCode = document.querySelector('#zipCode').value
-    const feelings = document.querySelector('#feelings').value
     
     if(!zipCode){
         // to stop here: use return
@@ -31,7 +30,7 @@ const checkInput = event => {
     getWeatherData(baseURL, key, zipCode)
     .then(userOutput => {
         // add data to POST request
-        postData('/saveData', { date: todaysDate, temp: userOutput.main.temp, feelings: feelings })
+        postData('/saveData', { date: todaysDate, temp: userOutput.main.temp, feelings: UIfeelings.value })
     }).then(() => {
         updateUI()
     })

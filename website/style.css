@@ -5,16 +5,18 @@
     padding: 0;
 }
 
-
 body{
     background: #333;
     font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 /* Reset style for HTML element on active to have no border*/
 input:focus,
 select:focus,
-textarea:focus,
 button:focus {
     outline: none;
 }
@@ -33,43 +35,100 @@ button:focus {
 
 /* General - */
 
-#app{
-    display: grid;
-    grid-auto-rows: minmax(150px, auto);
-    /* grid-template-columns:  */
-    height:100vh;
-    color: #333;
+input,
+button {
+    all: unset
+}
+
+#app {
+    margin: auto;
+    display: flex;
     justify-content: center;
-    grid-gap: 1em;
-    font-size: 20px;
+    align-items: center;
+    flex-direction: column;
 }
 
-.entry{
-    background: rgba(59, 74, 107, .4);
-    padding: 25px;
-    width:300px;
-}
-
-input{
-    display:block;
-    height: 60px;
-    width: 320px;
-    background:#22b2da;
-    color: #333;
-    font-size: 20px;
-    font-family: 'Arial', sans-serif;
-    border: none;
-}
-
-button{
+input,
+button,
+.UIdata {
     width: 400px;
-    height: 100px;
-    background: #3b4a6b;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    border: 3px solid #02b3e4;
+    margin: 20px 0 20px 0;
+}
+
+button,
+.UIdata {
+    background: #02b3e4;
+    color: #fff;
+}
+
+input,
+button {
+    height: 50px;
+    font-size: 1.7em;
+}
+
+input {
+    background: #fff;
     color: #333;
-    font-size: 26px;
-    font-family: 'Arial', sans-serif;
-    border: none;
-    box-shadow: 2px 4px 5px #444;
+
+}
+
+button {
     cursor: pointer;
 }
 
+.UIdata * {
+    margin-bottom: 20px;
+}
+
+.UIdata div{
+    font-size: 1.5em;
+}
+
+.UIdata {
+    width: 416px;
+    /* otherwise it's 400px */
+}
+
+@media only screen and (max-width: 768px){
+
+    h3 {
+        display: none;
+    }
+
+    input,
+    button,
+    .UIdata {
+        width: 60vw;
+        margin: 15px 0 15px 0;
+        padding: 0;
+    }
+
+    input,
+    button,
+    .UIdata div {
+        height: 30px;
+        font-size: 1.3em;
+    }
+
+    .UIdata * {
+        margin: 7px 0 7px 0;
+    }
+
+    ::placeholder { /* Firefox, Chrome, Opera */ 
+        font-size: .8em;
+    }
+    
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        font-size: .8em;
+    }
+    
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        font-size: .8em;
+    }
+
+}
