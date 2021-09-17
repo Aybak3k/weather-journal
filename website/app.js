@@ -9,7 +9,7 @@ let d0 = new Date()
 let todaysDate = `${d0.getDate()}/${d0.getMonth()+1}/${d0.getFullYear()}`
 
 // Personal API Key for OpenWeatherMap API
-const key = '574b80f9614a9b51b404b6a8bb946b48'
+const key = config.SECRET_API_KEY
 const baseURL = `https://api.openweathermap.org/data/2.5/weather?`
 
 
